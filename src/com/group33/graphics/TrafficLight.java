@@ -8,8 +8,14 @@ import java.awt.*;
 public class TrafficLight extends JComponent{
 
     private Light light;
-    private int x=30,y=25,WIDTH=25,HEIGHT=65;
-    private final int DIAMETER = 15,X_OFFSET = 5,Y_OFFSET = 5;
+    private int x=30;
+    private int y=25;
+    private int WIDTH=25;
+    private int HEIGHT=65;
+    private final int DIAMETER = 15;
+    private final int X_OFFSET = 5;
+    private final int Y_OFFSET = 5;
+
 
 
     public TrafficLight(int xAxis, int yAxis){
