@@ -20,11 +20,11 @@ public class VehicleFactory {
     public Vehicle getVehicle(String car){
         switch (car) {
             case "sport":
-                return null;
+                return new Sport(this.xAxis,this.yAxis,this.vehicleImageFilePath,this.vehicleDirection);
             case "suv":
-                return null;
+                return new SUV(this.xAxis,this.yAxis,this.vehicleImageFilePath,this.vehicleDirection);
             case "sedan":
-                return null;
+                return new Sedan(this.xAxis,this.yAxis,this.vehicleImageFilePath,this.vehicleDirection);
 
         }
         return null;
