@@ -6,27 +6,26 @@ import java.io.IOException;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import java.awt.BorderLayout;
 
 public class Traffic implements Runnable {
-	
-	int width;
-	int height;
-	String title;
 
-	JFrame frame;
+	private int width;
+	private int height;
+	private String title;
+
+	private JFrame frame;
+	private TrafficLight trafficLight;
 	private Image backgroundImage;
 
-	boolean running;
+	private boolean running;
 
 	public Traffic(String title,int width,int height)  {
 		
-		frame = new JFrame(); 
-		
+		frame = new JFrame();
+		trafficLight = new TrafficLight(width-100,0);
 		frame.setTitle(title);
 		frame.setSize(width,height);
 		frame.setPreferredSize(new Dimension(width,height));
@@ -40,13 +39,9 @@ public class Traffic implements Runnable {
 
 		frame.setLayout(new BorderLayout());
 		frame.setSize(width, height);
-		frame.add(new JLabel(new ImageIcon(this.backgroundImage)));
+		frame.add(new JLabel(new ImageIcon(this.backgroundImage)),BorderLayout.SOUTH);
+		frame.add(trafficLight,BorderLayout.NORTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		
-		
-		
-		
 		frame.setVisible(true);
 
 	
