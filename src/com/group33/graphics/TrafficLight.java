@@ -17,6 +17,7 @@ public class TrafficLight extends JComponent{
     private final int Y_OFFSET = 5;
 
 
+
     public TrafficLight(int xAxis, int yAxis){
         super();
         this.setBackground(Color.WHITE);
