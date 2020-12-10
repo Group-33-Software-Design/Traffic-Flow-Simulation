@@ -1,58 +1,22 @@
 package com.group33.vehicle;
 
+import com.group33.road.RoadDirection;
 
-public class Sedan{
-    protected int xAxis;
-    protected int  yAxis;
-    protected int vehicleWidth;
-    protected int vehicleHeight;
-    protected int vehicleSpeed;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
-    public Sedan(int xAxis, int yAxis, int vehicleWidth, int vehicleHeight, int vehicleSpeed) {
-        this.xAxis = xAxis;
-        this.yAxis = yAxis;
-        this.vehicleWidth = vehicleWidth;
-        this.vehicleHeight = vehicleHeight;
-        this.vehicleSpeed = vehicleSpeed;
-    }
-
-    public int getxAxis() {
-        return xAxis;
-    }
-
-    public void setxAxis(int xAxis) {
-        this.xAxis = xAxis;
-    }
-
-    public int getyAxis() {
-        return yAxis;
-    }
-
-    public void setyAxis(int yAxis) {
-        this.yAxis = yAxis;
-    }
-
-    public int getVehicleWidth() {
-        return vehicleWidth;
-    }
-
-    public void setVehicleWidth(int vehicleWidth) {
-        this.vehicleWidth = vehicleWidth;
-    }
-
-    public int getVehicleHeight() {
-        return vehicleHeight;
-    }
-
-    public void setVehicleHeight(int vehicleHeight) {
-        this.vehicleHeight = vehicleHeight;
-    }
-
-    public int getVehicleSpeed() {
-        return vehicleSpeed;
-    }
-
-    public void setVehicleSpeed(int vehicleSpeed) {
-        this.vehicleSpeed = vehicleSpeed;
+public class Sedan extends Vehicle{
+    public Sedan(int newXAxis, int newYAxis, File newVehicleImageFilePath, RoadDirection newVehicleDirection) {
+        super(newXAxis, newYAxis, newVehicleImageFilePath, newVehicleDirection);
+        this.setVehicleSpeed(40);
+        this.setVehicleHeight(50);
+        this.setVehicleWidth(90);
+        try {
+            this.vehicleImage = ImageIO.read(this.vehicleImageFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.vehicleImage = vehicleImage.getScaledInstance(this.vehicleWidth, this.getVehicleHeight(), vehicleImage.SCALE_DEFAULT);
     }
 }
