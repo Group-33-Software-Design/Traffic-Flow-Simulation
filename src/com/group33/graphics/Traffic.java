@@ -11,9 +11,7 @@ public class Traffic implements Runnable {
 	int width;
 	int height;
 	String title;
-	
 
-	
 	JFrame frame;
 	
 
