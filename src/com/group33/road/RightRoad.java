@@ -1,6 +1,6 @@
 package com.group33.road;
 
-public class RightRoad {
+public class RightRoad extends Road {
 
     protected int roadWidth;
     protected final int roadHeight = 600;
@@ -9,12 +9,8 @@ public class RightRoad {
     protected int xAxis;
     protected int yAxis;
 
-    public RightRoad(int roadWidth, int laneHeight, int numberOfLane, int xAxis, int yAxis) {
-        this.roadWidth = roadWidth;
-        this.laneHeight = laneHeight;
-        this.numberOfLane = numberOfLane;
-        this.xAxis = xAxis;
-        this.yAxis = yAxis;
+    public RightRoad(int newXAxis, int newYAxis, int newRoadWidth, int newNumberOfLane, int newLaneHeight, RoadDirection newVehicleDirection) {
+        super(newXAxis, newYAxis, newRoadWidth, newNumberOfLane, newLaneHeight, newVehicleDirection);
     }
 
     public int getRoadWidth() {
