@@ -43,8 +43,6 @@ public class Traffic implements Runnable {
 		frame.add(trafficLight,BorderLayout.NORTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-
-	
 	}
 	
 
