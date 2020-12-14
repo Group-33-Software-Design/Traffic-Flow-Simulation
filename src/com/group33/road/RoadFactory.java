@@ -25,6 +25,4 @@ public class RoadFactory {
         }
         return null;
     }
-
-
 }
