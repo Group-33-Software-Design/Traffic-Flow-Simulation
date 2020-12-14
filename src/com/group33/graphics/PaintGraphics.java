@@ -19,12 +19,22 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
 
     public PaintGraphics(String title, int newWidth, int newHeight) throws HeadlessException {
         super(title, newWidth, newHeight);
+        this.getTopControls().getStart().addActionListener(this);
+        this.getTopControls().getStop().addActionListener(this);
+        this.getTopControls().getReset().addActionListener(this);
+        this.getBottomControls().getExperiencedDriver().addActionListener(this);
+        this.getBottomControls().getExperiencedDriver2().addActionListener(this);
+        this.getBottomControls().getNormalDriver().addActionListener(this);
+        this.getBottomControls().getNormalDriver2().addActionListener(this);
+        this.getBottomControls().getRecklessDriver().addActionListener(this);
+        this.getBottomControls().getRecklessDriver2().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource().equals(this.getTopControls().getStart())) {
             if(timeclass.getRunning() == false) {
+                timeclass.changeRunningStatus();
                 timeclass.setStartTime();
                 Thread t = new Thread(this);
                 t.start();
@@ -35,6 +45,9 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
 
         if(event.getSource().equals(this.getTopControls().getStop())) {
             light.setTrafficstate(false);
+            timeclass.setRunnerFalse();
+            this.getRoadContainer().getRightRoadTrafficLight().getLight().reset();
+            this.getRoadContainer().getLeftRoadTrafficLight().getLight().reset();
         }
 
         if(event.getSource().equals(this.getTopControls().getReset())) {
@@ -169,7 +182,8 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
 
     @Override
     public void run() {
-        while(timeclass.getInstance().getRunning() == true) {
+        System.out.println(timeclass.getRunning());
+        while(timeclass.getRunning() == true) {
             this.getRoadContainer().getRightRoad().moveCars();
             this.getRoadContainer().getLeftRoad().moveCars();
             this.repaint();
