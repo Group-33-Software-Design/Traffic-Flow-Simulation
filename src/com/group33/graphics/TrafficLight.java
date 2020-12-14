@@ -33,44 +33,31 @@ public class TrafficLight extends JComponent{
         super.paintComponent(g);
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(x,y,WIDTH,HEIGHT);
-        for(int i= 1; i < 4 ; i++){
-            setColor(g, i);
+
+        if(light.indexOfLightBulb() == 0){
+            g.setColor(Color.RED);
+        }else{
+            g.setColor(Color.DARK_GRAY);
+
         }
+        g.fillOval(x+X_OFFSET,y+Y_OFFSET,DIAMETER,DIAMETER);
+
+        if(light.indexOfLightBulb() == 1){
+            g.setColor(Color.YELLOW);
+        }else{
+            g.setColor(Color.DARK_GRAY);
+
+        }
+        g.fillOval(x+X_OFFSET, y+DIAMETER+2*Y_OFFSET,DIAMETER,DIAMETER);
+
+        if(light.indexOfLightBulb() == 2){
+            g.setColor(Color.GREEN);
+        }else{
+            g.setColor(Color.DARK_GRAY);
+
+        }
+        g.fillOval(x+X_OFFSET, y+2*DIAMETER+3*Y_OFFSET,DIAMETER,DIAMETER);
         this.repaint();
-    }
-
-    public  void setColor (Graphics g, int lightcount){
-        switch(lightcount) {
-            case 1:
-                // show red light
-                        if(light.indexOfLightBulb() == 0){
-                            g.setColor(Color.RED);
-                        }else{
-                            g.setColor(Color.DARK_GRAY);
-
-                        }
-                      g.fillOval(x+X_OFFSET,y+Y_OFFSET,DIAMETER,DIAMETER);
-                break;
-            case 2:
-                // show green light
-                        if(light.indexOfLightBulb() == 1){
-                            g.setColor(Color.YELLOW);
-                        }else{
-                            g.setColor(Color.DARK_GRAY);
-
-                        }
-                        g.fillOval(x+X_OFFSET, y+DIAMETER+2*Y_OFFSET,DIAMETER,DIAMETER);
-                break;
-            default:
-                // show default gray light
-                        if(light.indexOfLightBulb() == 2){
-                            g.setColor(Color.GREEN);
-                        }else{
-                            g.setColor(Color.DARK_GRAY);
-
-                        }
-                        g.fillOval(x+X_OFFSET, y+2*DIAMETER+3*Y_OFFSET,DIAMETER,DIAMETER);
-        }
     }
 
 }
