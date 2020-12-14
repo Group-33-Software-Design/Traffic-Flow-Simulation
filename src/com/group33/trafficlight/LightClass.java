@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Observable;
 
 public class LightClass implements Subject {
+
     private boolean trafficstate = true;
+
     private List<Observer> observerList = new ArrayList<>();
 
     public boolean isTrafficstate() {
