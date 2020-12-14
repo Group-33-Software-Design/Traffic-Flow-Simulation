@@ -1,6 +1,9 @@
 package com.group33.road;
 
+<<<<<<< HEAD
 import com.group33.collision.Collision;
+=======
+>>>>>>> master
 import com.group33.graphics.TrafficLight;
 import com.group33.vehicle.Vehicle;
 
@@ -13,7 +16,10 @@ import java.util.ArrayList;
 
 public class Road extends JComponent implements IRoad{
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     protected ArrayList<Vehicle> cars;
     protected int roadWidth;
     protected final int roadHeight = 600;
@@ -38,7 +44,18 @@ public class Road extends JComponent implements IRoad{
         this.numberOfLane = newNumberOfLane;
         this.laneHeight = newLaneHeight;
         this.cars = new ArrayList<Vehicle>();
+<<<<<<< HEAD
         this.applyBackgroundImage();
+=======
+
+        try {
+            this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
+            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, this.backgroundImage.SCALE_DEFAULT);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+>>>>>>> master
         this.setLayout( new OverlayLayout(this) );
     }
 
@@ -55,6 +72,7 @@ public class Road extends JComponent implements IRoad{
     @Override
     public void moveCars() { }
 
+<<<<<<< HEAD
     public void applyBackgroundImage(){
         try {
             this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
@@ -65,6 +83,8 @@ public class Road extends JComponent implements IRoad{
     }
 
 
+=======
+>>>>>>> master
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.paintStageBackground(g);

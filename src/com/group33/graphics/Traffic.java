@@ -180,7 +180,10 @@ public class Traffic implements ActionListener, Runnable {
 		if(event.getSource().equals(experiencedDriver2)){
 			Vehicle sport2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sportcarfliped.png"),RoadDirection.LEFT).getVehicle("sport");
 			leftRoad.addCar(sport2);
+<<<<<<< HEAD
 			light.registerObserver(sport2);
+=======
+>>>>>>> master
 			Collision collision2 = new Collision();
 			collision2.setVehicles(leftRoad.getCars());
 
@@ -261,7 +264,10 @@ public class Traffic implements ActionListener, Runnable {
 		if(event.getSource().equals(normalDriver2)){
 			Vehicle sedan2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sedanfliped.png"),RoadDirection.LEFT).getVehicle("sedan");
 			leftRoad.addCar(sedan2);
+<<<<<<< HEAD
 			light.registerObserver(sedan2);
+=======
+>>>>>>> master
 			Collision collision2 = new Collision();
 			collision2.setVehicles(leftRoad.getCars());
 
@@ -276,6 +282,11 @@ public class Traffic implements ActionListener, Runnable {
 					}
 				}
 			}
+<<<<<<< HEAD
+=======
+
+		}
+>>>>>>> master
 
 		}
 
