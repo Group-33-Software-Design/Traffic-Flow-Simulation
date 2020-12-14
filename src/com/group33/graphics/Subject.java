@@ -1,2 +1,7 @@
-package com.group33.graphics;public interface Subject {
+package com.group33.graphics;
+
+public interface Subject {
+    public void registerObserver(Observer o);
+    public void unregisterObserver(Observer o);
+    public void notifyObservers();
 }
