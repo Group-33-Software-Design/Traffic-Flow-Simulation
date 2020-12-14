@@ -1,6 +1,6 @@
 package com.group33.view.graphics;
 
-import com.group33.config.LightClass;
+import com.group33.config.Observables;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class BottomControls extends Container{
     private JButton experiencedDriver2;
     private JButton recklessDriver2;
     private JButton normalDriver2;
-    private LightClass lightClass;
+    private Observables lightClass;
 
     public BottomControls() {
         this.experiencedDriver = new JButton("Add Experienced Driver");
@@ -56,7 +56,7 @@ public class BottomControls extends Container{
         return normalDriver2;
     }
 
-    public LightClass getLightClass() {
+    public Observables getLightClass() {
         return lightClass;
     }
 }

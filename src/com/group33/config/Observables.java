@@ -6,7 +6,7 @@ import com.group33.config.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LightClass implements Subject {
+public class Observables implements Subject {
 
     private boolean trafficstate = true;
 
