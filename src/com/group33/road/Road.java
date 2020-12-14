@@ -39,7 +39,8 @@ public class Road extends JComponent implements IRoad {
 
         try {
             this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
-            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, this.backgroundImage.SCALE_DEFAULT);
+            System.out.println("Afdd background image" );
+            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
