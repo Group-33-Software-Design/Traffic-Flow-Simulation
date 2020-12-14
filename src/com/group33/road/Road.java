@@ -1,6 +1,5 @@
 package com.group33.road;
 
-
 import com.group33.graphics.TrafficLight;
 import com.group33.vehicle.Vehicle;
 
@@ -11,7 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Road extends JComponent implements IRoad {
+public class Road extends JComponent implements IRoad{
+
     protected ArrayList<Vehicle> cars;
     protected int roadWidth;
     protected final int roadHeight = 600;
@@ -39,8 +39,7 @@ public class Road extends JComponent implements IRoad {
 
         try {
             this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
-            System.out.println("Afdd background image" );
-            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, Image.SCALE_DEFAULT);
+            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, this.backgroundImage.SCALE_DEFAULT);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -59,9 +58,8 @@ public class Road extends JComponent implements IRoad {
     }
 
     @Override
-    public void moveCars() {
+    public void moveCars() { }
 
-    }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(this.backgroundImage,0,0,null);
@@ -159,5 +157,3 @@ public class Road extends JComponent implements IRoad {
         return ROAD_LINE_DEMACATOR_BOX_HEIGHT;
     }
 }
-
-
