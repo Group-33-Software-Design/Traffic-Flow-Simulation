@@ -165,6 +165,62 @@ public class Traffic implements ActionListener, Runnable{
 			}
 		}
 
+		if(event.getSource().equals(recklessDriver)){
+			Vehicle suv = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/suv.png"),RoadDirection.RIGHT).getVehicle("suv");
+			rightRoad.addCar(suv);
+			Collision.setVehicles(rightRoad.getCars());
+			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
+				for(int y=rightRoad.getyAxis()+10; y < rightRoad.getLaneHeight()*rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
+					suv.setxAxis(x);
+					suv.setyAxis(y);
+					if(Collision.collision(x,y,suv,RoadDirection.RIGHT) == false){
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+
+		if(event.getSource().equals(recklessDriver2)){
+			Vehicle suv2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/suvfliped.png"),RoadDirection.LEFT).getVehicle("suv");
+			leftRoad.addCar(suv2);
+			Collision collision2 = new Collision();
+			collision2.setVehicles(leftRoad.getCars());
+
+			for(int x = leftRoad.getRoadWidth()-100; x > 0; x = x - 20){
+				for(int y=leftRoad.getyAxis(); y < leftRoad.getLaneHeight()*leftRoad.getNumberOfLane(); y = y + leftRoad.getLaneHeight()) {
+					suv2.setxAxis(x);
+					suv2.setyAxis(y);
+					if(collision2.collision(x,y,suv2,RoadDirection.LEFT) == false){
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+
+
+
+
+		if(event.getSource().equals(normalDriver)){
+			Vehicle sedan = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/sedan.png"),RoadDirection.RIGHT).getVehicle("sedan");
+			rightRoad.addCar(sedan);
+			Collision collision1 = new Collision();
+			collision1.setVehicles(rightRoad.getCars());
+			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
+
+				for(int y=rightRoad.getyAxis()+10; y < rightRoad.getLaneHeight()*rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
+					System.out.println("here1 "+y);
+					sedan.setxAxis(x);
+					sedan.setyAxis(y);
+					if(collision1.collision(x,y,sedan,RoadDirection.RIGHT) == false){
+						frame.repaint();
+						return;
+					}
+				}
+			}
+
+		}
 
 
 		if(event.getSource().equals(experiencedDriver2)){
