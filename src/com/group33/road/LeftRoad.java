@@ -1,62 +1,50 @@
 package com.group33.road;
 
-public class LeftRoad extends Road {
+import com.group33.collision.Collision;
+import com.group33.time.timeclass;
+import com.group33.vehicle.Vehicle;
 
-    protected int roadWidth;
-    protected final int roadHeight = 600;
-    protected int laneHeight;
-    protected int numberOfLane;
-    protected int xAxis;
-    protected int yAxis;
+
+public class LeftRoad extends Road{
 
     public LeftRoad(int newXAxis, int newYAxis, int newRoadWidth,  int newNumberOfLane, int newLaneHeight, RoadDirection newVehicleDirection) {
         super(newXAxis, newYAxis, newRoadWidth,  newNumberOfLane, newLaneHeight, newVehicleDirection);
     }
 
-    public int getRoadWidth() {
-        return roadWidth;
+    public void switchVehicleLane(Vehicle v){
+        if(v.getyAxis() < this.getyAxis()+10 && (collision.collision(v.getxAxis() ,v.getyAxis() - this.laneHeight ,v,RoadDirection.LEFT)) == false){ // not in leftmost lane
+            v.setyAxis(v.getyAxis() + this.laneHeight);
+        }
+        else if(v.getyAxis() > this.getyAxis()+10 * this.laneHeight && (collision.collision(v.getxAxis() ,v.getyAxis() + this.laneHeight ,v,RoadDirection.LEFT)) == false){
+            v.setyAxis(v.getyAxis() + this.laneHeight);
+        }
     }
 
-    public void setRoadWidth(int roadWidth) {
-        this.roadWidth = roadWidth;
+    public void ensureVehicleIsNotColliding(Vehicle v){
+        v.setxAxis(v.getxAxis() - v.getVehicleSpeed());
+        if(v.getxAxis() < 0)
+        {
+            v.setxAxis(this.roadWidth-100);
+            if(collision.collision(v.getxAxis() - v.getVehicleSpeed() ,v.getyAxis() ,v,RoadDirection.LEFT) == false) {
+                v.setxAxis(v.getxAxis() - v.getVehicleSpeed());
+            }
+        }
     }
 
-    public int getRoadHeight() {
-        return roadHeight;
+    public void moveCars() {
+        //loop through all the cars in the array list
+        //Get the only object available
+        for(int a = 0; a < cars.size(); a++) {
+            //Get a vehicle from the c
+            Vehicle v = cars.get(a);
+            if(collision.collision(v.getxAxis() - v.getVehicleSpeed() ,v.getyAxis() ,v,RoadDirection.LEFT) == false){  ///there is no collision
+                this.ensureVehicleIsNotColliding(v);
+            }
+            else{ //switching lane
+                this.switchVehicleLane(v);
+            }
+            v.accelerate();
+        }
     }
-
-    public int getLaneHeight() {
-        return laneHeight;
-    }
-
-    public void setLaneHeight(int laneHeight) {
-        this.laneHeight = laneHeight;
-    }
-
-    public int getNumberOfLane() {
-        return numberOfLane;
-    }
-
-    public void setNumberOfLane(int numberOfLane) {
-        this.numberOfLane = numberOfLane;
-    }
-
-    public int getxAxis() {
-        return xAxis;
-    }
-
-    public void setxAxis(int xAxis) {
-        this.xAxis = xAxis;
-    }
-
-    public int getyAxis() {
-        return yAxis;
-    }
-
-    public void setyAxis(int yAxis) {
-        this.yAxis = yAxis;
-    }
-
- 
 
 }

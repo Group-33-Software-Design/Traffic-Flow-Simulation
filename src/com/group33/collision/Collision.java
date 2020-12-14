@@ -9,10 +9,6 @@ public class Collision {
 
     public static ArrayList<Vehicle> vehicles;
 
-    /**
-     * implement collision 
-     * @return
-     */
     public static boolean collision(int x, int y, Vehicle vehicle, RoadDirection vehicleDirection){
         boolean collide = false;
         //loop through all the vehicles

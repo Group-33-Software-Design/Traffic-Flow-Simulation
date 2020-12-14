@@ -1,6 +1,6 @@
 package com.group33.road;
 
-
+import com.group33.collision.Collision;
 import com.group33.graphics.TrafficLight;
 import com.group33.vehicle.Vehicle;
 
@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Road extends JComponent implements IRoad {
+public class Road extends JComponent implements IRoad{
+
+
     protected ArrayList<Vehicle> cars;
     protected int roadWidth;
     protected final int roadHeight = 600;
@@ -25,10 +27,10 @@ public class Road extends JComponent implements IRoad {
     protected final int ROAD_LINE_DEMACATOR_BOX_WIDTH = 15;
     protected final int ROAD_LINE_DEMACATOR_BOX_HEIGHT = 3;
     protected Image backgroundImage;
+    protected Collision collision  = new Collision();
 
     public Road (int newXAxis, int newYAxis, int newRoadWidth, int newNumberOfLane, int newLaneHeight, RoadDirection newVehicleDirection) {
         super();
-
         this.xAxis = newXAxis;
         this.yAxis = newYAxis;
         this.roadWidth = newRoadWidth;
@@ -36,15 +38,7 @@ public class Road extends JComponent implements IRoad {
         this.numberOfLane = newNumberOfLane;
         this.laneHeight = newLaneHeight;
         this.cars = new ArrayList<Vehicle>();
-
-        try {
-            this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
-            System.out.println("Afdd background image" );
-            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, Image.SCALE_DEFAULT);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        this.applyBackgroundImage();
         this.setLayout( new OverlayLayout(this) );
     }
 
@@ -59,12 +53,31 @@ public class Road extends JComponent implements IRoad {
     }
 
     @Override
-    public void moveCars() {
+    public void moveCars() { }
 
+    public void applyBackgroundImage(){
+        try {
+            this.backgroundImage = ImageIO.read(new File("resource/image/NewRoad.png"));
+            this.backgroundImage = this.backgroundImage.getScaledInstance(this.roadWidth, this.roadHeight, this.backgroundImage.SCALE_DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.paintStageBackground(g);
+        this.drawRoadLane(g);
+        this.paintVehicleOnStage(g);
+        this.repaint();
+    }
+
+    public void paintStageBackground(Graphics g){
         g.drawImage(this.backgroundImage,0,0,null);
+    }
+
+    public void drawRoadLane(Graphics g){
         g.setColor(Color.BLACK);
         g.fillRect(this.xAxis, this.yAxis, this.roadWidth, this.laneHeight * this.numberOfLane);
         g.setColor(Color.WHITE);
@@ -73,10 +86,12 @@ public class Road extends JComponent implements IRoad {
                 g.fillRect(b, a+this.yAxis, this.ROAD_LINE_DEMACATOR_BOX_WIDTH, this.ROAD_LINE_DEMACATOR_BOX_HEIGHT);
             }
         }
+    }
+
+    public void paintVehicleOnStage(Graphics g){
         for(int a=0; a < cars.size(); a++) {
             cars.get(a).drawCar(g);
         }
-        this.repaint();
     }
 
     public ArrayList<Vehicle> getCars() {
@@ -159,5 +174,3 @@ public class Road extends JComponent implements IRoad {
         return ROAD_LINE_DEMACATOR_BOX_HEIGHT;
     }
 }
-
-
