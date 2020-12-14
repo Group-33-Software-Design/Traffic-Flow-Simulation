@@ -3,7 +3,7 @@ package com.group33.view;
 import com.group33.models.collision.Collision;
 import com.group33.models.road.RoadDirection;
 import com.group33.models.time.timeclass;
-import com.group33.config.LightClass;
+import com.group33.config.Observables;
 import com.group33.models.vehicle.Vehicle;
 import com.group33.models.vehicle.VehicleFactory;
 import com.group33.view.graphics.Configuration;
@@ -16,7 +16,7 @@ import java.io.File;
 
 public class PaintGraphics extends Stage implements ActionListener, Runnable{
 
-    LightClass light = new LightClass();
+    Observables light = new Observables();
 
     public PaintGraphics(String title, int newWidth, int newHeight) throws HeadlessException {
         super(title, newWidth, newHeight);
