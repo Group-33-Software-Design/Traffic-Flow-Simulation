@@ -1,11 +1,13 @@
 package com.group33.vehicle;
 
 import com.group33.road.RoadDirection;
+import com.group33.time.timeclass;
+import com.group33.trafficlight.Observer;
 
 import java.awt.*;
 import java.io.File;
 
-public class Vehicle implements IVehicle{
+public class Vehicle implements IVehicle, Observer {
 
     protected int xAxis,yAxis,vehicleWidth,vehicleHeight,vehicleSpeed;
     protected RoadDirection vehicleDirection;
@@ -75,4 +77,11 @@ public class Vehicle implements IVehicle{
         this.vehicleSpeed = vehicleSpeed;
     }
 
+    @Override
+    public void update(Object args) {
+        System.out.println("The traffic light changed here is!");
+        timeclass.getInstance().setRunnerFalse();
+        System.out.println(timeclass.getInstance().getRunning());
+
+    }
 }

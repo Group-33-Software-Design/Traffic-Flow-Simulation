@@ -13,20 +13,24 @@ import javax.swing.JFrame;
 
 
 import com.group33.collision.Collision;
+import com.group33.road.IRoad;
 import com.group33.road.Road;
 import com.group33.road.RoadDirection;
 import com.group33.road.RoadFactory;
+import com.group33.time.timeclass;
+import com.group33.trafficlight.LightClass;
+import com.group33.trafficlight.Observer;
 import com.group33.vehicle.*;
 
-public class Traffic implements ActionListener, Runnable{
-
+public class Traffic implements ActionListener, Runnable {
+	
 	int width;
 	int height;
 	String title;
 	Road rightRoad;
 	Road leftRoad;
 
-
+	
 	JFrame frame;
 	JButton start = new JButton("Show Green Light");
 	JButton stop= new JButton("Show Red Light");
@@ -42,12 +46,13 @@ public class Traffic implements ActionListener, Runnable{
 	Container vehicleContainer = new Container();
 	TrafficLight trafficLight;
 	TrafficLight trafficLight2;
+	LightClass light = new LightClass();
 
 	boolean running;
 
 	public Traffic(String title,int width,int height) throws HeadlessException {
-
-		frame = new JFrame();
+		
+		frame = new JFrame(); 
 		JButton jbutton = new JButton("test");
 		frame.setTitle(title);
 		frame.setSize(width,height);
@@ -72,16 +77,16 @@ public class Traffic implements ActionListener, Runnable{
 		trafficLight2 = new TrafficLight(50,20);
 
 		leftRoad.add(trafficLight2);
-
-		vehicleContainer.add(rightRoad);
-
-		vehicleContainer.add(leftRoad);
-
-
-
+		
+		vehicleContainer.add((Road)rightRoad);
+		
+		vehicleContainer.add((Road)leftRoad);
+		
+	
+		
 		frame.add(vehicleContainer,BorderLayout.CENTER);
-
-
+		
+		
 
 		bottomContainer.setLayout(new GridLayout(1,3));
 		bottomContainer.add(start);
@@ -110,34 +115,38 @@ public class Traffic implements ActionListener, Runnable{
 		normalDriver2.addActionListener(this);
 
 		frame.add(topContainer, BorderLayout.SOUTH);
-
-
-
+		
+		
+		
 		frame.setVisible(true);
 
 		frame.repaint();
 		frame.pack();
-
+		
 	}
-
+	
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		// TODO Auto-generated method stub
 		if(event.getSource().equals(start)) {
 			if(running == false) {
-				running = true;
+				//call the time class
+				timeclass.setStartTime();
+				timeclass.getInstance().changeRunningStatus();
+				running = timeclass.getInstance().getRunning();
 				Thread t = new Thread(this);
 				t.start();
 				this.trafficLight.getLight().nextState();
 				this.trafficLight2.getLight().nextState();
 			}
 		}
-
+		
 		if(event.getSource().equals(stop)) {
-			running = false;
-			this.trafficLight.getLight().nextState();
-			this.trafficLight2.getLight().nextState();
+//			running = false;
+//			this.trafficLight.getLight().nextState();
+//			this.trafficLight2.getLight().nextState();
+			light.setTrafficstate(false);
 		}
 
 		if(event.getSource().equals(reset)) {
@@ -152,6 +161,7 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(experiencedDriver)){
 			Vehicle sport = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/sportcar.png"),RoadDirection.RIGHT).getVehicle("sport");
 			rightRoad.addCar(sport);
+			light.registerObserver(sport);
 			Collision.setVehicles(rightRoad.getCars());
 			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
 				for(int y=rightRoad.getyAxis()+10; y < rightRoad.getLaneHeight()*rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
@@ -170,6 +180,10 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(experiencedDriver2)){
 			Vehicle sport2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sportcarfliped.png"),RoadDirection.LEFT).getVehicle("sport");
 			leftRoad.addCar(sport2);
+<<<<<<< HEAD
+			light.registerObserver(sport2);
+=======
+>>>>>>> master
 			Collision collision2 = new Collision();
 			collision2.setVehicles(leftRoad.getCars());
 
@@ -190,6 +204,7 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(recklessDriver)){
 			Vehicle suv = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/suv.png"),RoadDirection.RIGHT).getVehicle("suv");
 			rightRoad.addCar(suv);
+			light.registerObserver(suv);
 			Collision.setVehicles(rightRoad.getCars());
 			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
 				for(int y=rightRoad.getyAxis()+10; y < rightRoad.getLaneHeight()*rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
@@ -206,6 +221,7 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(recklessDriver2)){
 			Vehicle suv2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/suvfliped.png"),RoadDirection.LEFT).getVehicle("suv");
 			leftRoad.addCar(suv2);
+			light.registerObserver(suv2);
 			Collision collision2 = new Collision();
 			collision2.setVehicles(leftRoad.getCars());
 
@@ -227,6 +243,7 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(normalDriver)){
 			Vehicle sedan = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/sedan.png"),RoadDirection.RIGHT).getVehicle("sedan");
 			rightRoad.addCar(sedan);
+			light.registerObserver(sedan);
 			Collision collision1 = new Collision();
 			collision1.setVehicles(rightRoad.getCars());
 			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
@@ -247,6 +264,10 @@ public class Traffic implements ActionListener, Runnable{
 		if(event.getSource().equals(normalDriver2)){
 			Vehicle sedan2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sedanfliped.png"),RoadDirection.LEFT).getVehicle("sedan");
 			leftRoad.addCar(sedan2);
+<<<<<<< HEAD
+			light.registerObserver(sedan2);
+=======
+>>>>>>> master
 			Collision collision2 = new Collision();
 			collision2.setVehicles(leftRoad.getCars());
 
@@ -261,17 +282,23 @@ public class Traffic implements ActionListener, Runnable{
 					}
 				}
 			}
+<<<<<<< HEAD
+=======
+
+		}
+>>>>>>> master
 
 		}
 
-
+		
 	}
-
+	
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(running == true) {
+
+		while(timeclass.getInstance().getRunning() == true) {
 			rightRoad.moveCars();
 			leftRoad.moveCars();
 			frame.repaint();
@@ -285,5 +312,12 @@ public class Traffic implements ActionListener, Runnable{
 	}
 
 
-
+	/*@Override
+	public void update(Object args) {
+		String light = (String) args;
+		System.out.println("The traffic light changed here is!");
+		running = false;
+		this.trafficLight.getLight().nextState();
+		this.trafficLight2.getLight().nextState();
+	}*/
 }
