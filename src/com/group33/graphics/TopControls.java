@@ -5,7 +5,7 @@ import com.group33.time.timeclass;
 import javax.swing.*;
 import java.awt.*;
 
-public class TopControls  extends Container  {
+public class TopControls  extends Container{
 
     private JButton start;
     private JButton stop;
@@ -32,4 +32,5 @@ public class TopControls  extends Container  {
     public JButton getReset() {
         return reset;
     }
+
 }

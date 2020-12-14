@@ -1,4 +1,4 @@
-package com.group33.graphics;
+package com.group33.graphics;/*package com.group33.graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -308,4 +308,4 @@ public class Traffic implements ActionListener, Runnable {
 		this.trafficLight.getLight().nextState();
 		this.trafficLight2.getLight().nextState();
 	}*/
-}
+

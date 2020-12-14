@@ -4,8 +4,10 @@ import com.group33.trafficlight.LightClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BottomControls extends Container {
+public class BottomControls extends Container{
 
     private JButton experiencedDriver;
     private JButton recklessDriver;
