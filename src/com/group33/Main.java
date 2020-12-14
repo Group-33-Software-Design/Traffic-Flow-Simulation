@@ -1,6 +1,6 @@
 package com.group33;
 
-import com.group33.graphics.PaintGraphics;
+import com.group33.view.PaintGraphics;
 
 public class Main {
 
