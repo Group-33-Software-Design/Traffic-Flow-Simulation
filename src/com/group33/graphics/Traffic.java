@@ -165,6 +165,28 @@ public class Traffic implements ActionListener, Runnable{
 			}
 		}
 
+
+
+		if(event.getSource().equals(experiencedDriver2)){
+			Vehicle sport2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sportcarfliped.png"),RoadDirection.LEFT).getVehicle("sport");
+			leftRoad.addCar(sport2);
+			Collision collision2 = new Collision();
+			collision2.setVehicles(leftRoad.getCars());
+
+			for(int x = leftRoad.getRoadWidth()-100; x > 0; x = x - 20){
+				for(int y=leftRoad.getyAxis(); y < leftRoad.getLaneHeight()*leftRoad.getNumberOfLane(); y = y + leftRoad.getLaneHeight()) {
+					sport2.setxAxis(x);
+					sport2.setyAxis(y);
+					if(collision2.collision(x,y,sport2,RoadDirection.LEFT) == false){
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+
+
+
 		if(event.getSource().equals(recklessDriver)){
 			Vehicle suv = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/suv.png"),RoadDirection.RIGHT).getVehicle("suv");
 			rightRoad.addCar(suv);
@@ -201,45 +223,6 @@ public class Traffic implements ActionListener, Runnable{
 
 
 
-
-		if(event.getSource().equals(normalDriver)){
-			Vehicle sedan = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/sedan.png"),RoadDirection.RIGHT).getVehicle("sedan");
-			rightRoad.addCar(sedan);
-			Collision collision1 = new Collision();
-			collision1.setVehicles(rightRoad.getCars());
-			for(int x= 0; x < rightRoad.getRoadWidth(); x = x + 20){
-
-				for(int y=rightRoad.getyAxis()+10; y < rightRoad.getLaneHeight()*rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
-					System.out.println("here1 "+y);
-					sedan.setxAxis(x);
-					sedan.setyAxis(y);
-					if(collision1.collision(x,y,sedan,RoadDirection.RIGHT) == false){
-						frame.repaint();
-						return;
-					}
-				}
-			}
-
-		}
-
-
-		if(event.getSource().equals(experiencedDriver2)){
-			Vehicle sport2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File("resource/image/sportcarfliped.png"),RoadDirection.LEFT).getVehicle("sport");
-			leftRoad.addCar(sport2);
-			Collision collision2 = new Collision();
-			collision2.setVehicles(leftRoad.getCars());
-
-			for(int x = leftRoad.getRoadWidth()-100; x > 0; x = x - 20){
-				for(int y=leftRoad.getyAxis(); y < leftRoad.getLaneHeight()*leftRoad.getNumberOfLane(); y = y + leftRoad.getLaneHeight()) {
-					sport2.setxAxis(x);
-					sport2.setyAxis(y);
-					if(collision2.collision(x,y,sport2,RoadDirection.LEFT) == false){
-						frame.repaint();
-						return;
-					}
-				}
-			}
-		}
 
 		if(event.getSource().equals(normalDriver)){
 			Vehicle sedan = new VehicleFactory(rightRoad.getxAxis(),rightRoad.getyAxis()+10,new File("resource/image/sedan.png"),RoadDirection.RIGHT).getVehicle("sedan");
