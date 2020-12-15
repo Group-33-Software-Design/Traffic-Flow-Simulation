@@ -1,5 +1,6 @@
 package com.group33.models.vehicle;
 
+import com.group33.models.drivers.IDriver;
 import com.group33.models.road.RoadDirection;
 
 import javax.imageio.ImageIO;
@@ -7,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class SUV extends Vehicle{
-    public SUV(int newXAxis, int newYAxis, File newVehicleImageFilePath, RoadDirection newVehicleDirection) {
-        super(newXAxis, newYAxis, newVehicleImageFilePath, newVehicleDirection);
+    public SUV(int newXAxis, int newYAxis, File newVehicleImageFilePath, RoadDirection newVehicleDirection, IDriver driver) {
+        super(newXAxis, newYAxis, newVehicleImageFilePath, newVehicleDirection,driver);
         this.setVehicleSpeed(50);
         this.setVehicleHeight(50);
         this.setVehicleWidth(90);
