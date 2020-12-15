@@ -25,6 +25,9 @@ public class Configuration {
     private static String sedanImage = "resource/image/sedan.png";
     private static String suvImage = "resource/image/suv.png";
     private static String sportImage = "resource/image/sportcar.png";
+    private static String sedanFlipedImage = "resource/image/sedanfliped.png";
+    private static String suvFlipedImage = "resource/image/flipedsuv.png";
+    private static String sportFlipedImage = "resource/image/sportcarfliped.png";
     private static Configuration instance = new Configuration();
 
     private Configuration(){}
@@ -81,7 +84,7 @@ public class Configuration {
         running = !running;
     }
 
-    public static boolean getRunning(){
+    public static boolean isRunning(){
         return running;
     }
 
@@ -131,5 +134,17 @@ public class Configuration {
 
     public static String getSportImage() {
         return sportImage;
+    }
+
+    public static String getSedanFlipedImage() {
+        return sedanFlipedImage;
+    }
+
+    public static String getSuvFlipedImage() {
+        return suvFlipedImage;
+    }
+
+    public static String getSportFlipedImage() {
+        return sportFlipedImage;
     }
 }
