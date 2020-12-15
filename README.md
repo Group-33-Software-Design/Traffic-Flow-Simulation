@@ -12,3 +12,6 @@
 <p>Click Apply.</p>  <br />
 <p>Click Ok. </p> <br />
 <p>Run the program.</p>  <br />
+
+<br />
+<p>Please note that the images used for this project was sourced from <a href="https:images.google.com">Google Search Engine</a></p>  <br />
