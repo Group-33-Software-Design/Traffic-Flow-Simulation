@@ -2,11 +2,11 @@ package com.group33.view;
 
 import com.group33.models.collision.Collision;
 import com.group33.models.road.RoadDirection;
-import com.group33.models.time.timeclass;
+import com.group33.config.time.timeclass;
 import com.group33.config.Observables;
 import com.group33.models.vehicle.Vehicle;
 import com.group33.models.vehicle.VehicleFactory;
-import com.group33.view.graphics.Configuration;
+import com.group33.config.Configuration;
 import com.group33.view.graphics.Stage;
 
 import java.awt.*;
@@ -31,11 +31,12 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
         this.getBottomControls().getRecklessDriver2().addActionListener(this);
     }
 
+
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource().equals(this.getTopControls().getStart())) {
-            if(timeclass.getRunning() == false) {
-                timeclass.changeRunningStatus();
+            if(Configuration.getRunning() == false) {
+                Configuration.changeRunningStatus();
                 timeclass.setStartTime();
                 Thread t = new Thread(this);
                 t.start();
@@ -45,14 +46,14 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
         }
 
         if(event.getSource().equals(this.getTopControls().getStop())) {
-            light.setTrafficstate(false);
-            timeclass.setRunnerFalse();
+            //light.setCurrentState(false);
+            Configuration.setRunnerFalse();
             this.getRoadContainer().getRightRoadTrafficLight().getLight().reset();
             this.getRoadContainer().getLeftRoadTrafficLight().getLight().reset();
         }
 
         if(event.getSource().equals(this.getTopControls().getReset())) {
-            timeclass.setRunnerFalse();
+            Configuration.setRunnerFalse();
             this.getRoadContainer().getRightRoadTrafficLight().getLight().reset();
             this.getRoadContainer().getLeftRoadTrafficLight().getLight().reset();
             this.getRoadContainer().getLeftRoad().reset();
@@ -183,8 +184,8 @@ public class PaintGraphics extends Stage implements ActionListener, Runnable{
 
     @Override
     public void run() {
-        System.out.println(timeclass.getRunning());
-        while(timeclass.getRunning() == true) {
+        System.out.println(Configuration.getRunning());
+        while(Configuration.getRunning() == true) {
             this.getRoadContainer().getRightRoad().moveCars();
             this.getRoadContainer().getLeftRoad().moveCars();
             this.repaint();

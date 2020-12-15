@@ -1,5 +1,6 @@
 package com.group33.config;
 
+
 public class Configuration {
     private static int rightRoadXAxis = 0;
     private static int rightRoadYAxis = 50;
@@ -12,6 +13,7 @@ public class Configuration {
     private static int leftTrafficLightXAxis = 50;
     private static int leftTrafficLightYAxis = 20;
     private static int threadSleepTime = 350;
+    private static boolean running = false;
     private static Configuration instance = new Configuration();
 
     private Configuration(){}
@@ -62,5 +64,17 @@ public class Configuration {
 
     public static int getThreadSleepTime() {
         return threadSleepTime;
+    }
+
+    public static void changeRunningStatus(){
+        running = !running;
+    }
+
+    public static boolean getRunning(){
+        return running;
+    }
+
+    public static void setRunnerFalse(){
+        running = false;
     }
 }

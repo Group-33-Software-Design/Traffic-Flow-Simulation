@@ -1,7 +1,7 @@
 package com.group33.models.vehicle;
 
+import com.group33.config.Configuration;
 import com.group33.models.road.RoadDirection;
-import com.group33.models.time.timeclass;
 import com.group33.config.Observer;
 
 import java.awt.*;
@@ -80,8 +80,8 @@ public class Vehicle implements IVehicle, Observer {
     @Override
     public void update(Object args) {
         System.out.println("The traffic light changed here is!");
-        timeclass.getInstance().setRunnerFalse();
-        System.out.println(timeclass.getInstance().getRunning());
+        Configuration.setRunnerFalse();
+        System.out.println(Configuration.getRunning());
 
     }
 }
