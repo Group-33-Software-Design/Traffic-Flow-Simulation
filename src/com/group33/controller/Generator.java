@@ -29,7 +29,6 @@ public class Generator {
     }
 
 
-
     public void generateVehicles(JFrame frame){
         Random random = new Random();
         IDriver[] drivers = {
@@ -60,14 +59,12 @@ public class Generator {
             int randNumber = random.nextInt(3);
             Vehicle vehicle2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File(carsTypes[2][randNumber]),RoadDirection.LEFT,drivers[randNumber]).getVehicle(carsTypes[0][randNumber]);
             leftRoad.addCar(vehicle2);
-            Collision collision2 = new Collision();
-            collision2.setVehicles(leftRoad.getCars());
-
+            Collision.setVehicles(leftRoad.getCars());
             for(int x = leftRoad.getRoadWidth()-100; x > 0; x = x - 20){
                 for(int y=leftRoad.getyAxis(); y < leftRoad.getLaneHeight()*leftRoad.getNumberOfLane(); y = y + leftRoad.getLaneHeight()) {
                     vehicle2.setxAxis(x);
                     vehicle2.setyAxis(y);
-                    if(collision2.collision(x,y,vehicle2,RoadDirection.LEFT) == false){
+                    if(Collision.collision(x,y,vehicle2,RoadDirection.LEFT) == false){
                         frame.repaint();
                         break;
                     }
