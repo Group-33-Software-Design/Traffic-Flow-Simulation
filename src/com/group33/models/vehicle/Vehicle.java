@@ -1,6 +1,7 @@
 package com.group33.models.vehicle;
 
 import com.group33.config.Configuration;
+import com.group33.models.drivers.IDriver;
 import com.group33.models.road.RoadDirection;
 import com.group33.config.Observer;
 
@@ -13,10 +14,12 @@ public class Vehicle implements IVehicle, Observer {
     protected RoadDirection vehicleDirection;
     protected File vehicleImageFilePath;
     protected Image vehicleImage;
+    protected IDriver driver;
 
-    public Vehicle(int newXAxis, int newYAxis, File newVehicleImageFilePath, RoadDirection newVehicleDirection) {
+    public Vehicle(int newXAxis, int newYAxis, File newVehicleImageFilePath, RoadDirection newVehicleDirection,IDriver driver) {
         this.xAxis = newXAxis;
         this.yAxis = newYAxis;
+        this.driver = driver;
         this.vehicleImageFilePath = newVehicleImageFilePath;
         this.vehicleDirection = newVehicleDirection;
 
@@ -30,10 +33,10 @@ public class Vehicle implements IVehicle, Observer {
     @Override
     public void accelerate() {
         if(RoadDirection.LEFT == this.vehicleDirection){
-            this.xAxis = this.xAxis - this.vehicleSpeed ;
+            this.xAxis = (int) ((this.xAxis) - (this.vehicleSpeed * driver.getRISKFACTOR())) ;
 
         }else{
-            this.xAxis = this.xAxis + this.vehicleSpeed ;
+            this.xAxis = (int) (this.xAxis + this.vehicleSpeed * driver.getRISKFACTOR()) ;
         }
     }
 
