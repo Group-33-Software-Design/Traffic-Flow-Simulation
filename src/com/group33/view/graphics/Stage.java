@@ -23,11 +23,7 @@ public class Stage extends JFrame {
 
     public void drawStage(){
         roadContainer = new RoadContainer(dimension);
-        topControls = new TopControls();
-        bottomControls = new BottomControls();
         this.add(roadContainer,BorderLayout.CENTER);
-        this.add(topControls, BorderLayout.NORTH);
-        this.add(bottomControls, BorderLayout.SOUTH);
 
     }
 
