@@ -1,4 +1,4 @@
-package com.group33.models.time;
+package com.group33.config.time;
 
 public class timeclass {
     //create an object of SingleObject
@@ -21,18 +21,6 @@ public class timeclass {
         long currenttime = System.nanoTime();
         long timeElapsed = currenttime - starttime;
         System.out.println("The time elapsed!" + timeElapsed);
-    }
-
-    public static void changeRunningStatus(){
-        running = !running;
-    }
-
-    public static boolean getRunning(){
-        return running;
-    }
-
-    public static void setRunnerFalse(){
-        running = false;
     }
 
     public static void setStartTime(){
