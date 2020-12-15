@@ -84,7 +84,7 @@ public class Vehicle implements IVehicle, Observer {
     public void update(Object args) {
         System.out.println("The traffic light changed here is!");
         Configuration.setRunnerFalse();
-        System.out.println(Configuration.getRunning());
+        System.out.println(Configuration.isRunning());
 
     }
 }

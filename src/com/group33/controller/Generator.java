@@ -5,7 +5,6 @@ import com.group33.models.collision.Collision;
 import com.group33.models.drivers.*;
 import com.group33.models.road.Road;
 import com.group33.models.road.RoadDirection;
-import com.group33.models.vehicle.IVehicle;
 import com.group33.models.vehicle.Vehicle;
 import com.group33.models.vehicle.VehicleFactory;
 
@@ -17,6 +16,11 @@ public class Generator {
 
     private Road rightRoad;
     private Road leftRoad;
+    private final String[][] carsTypes = {
+        {Configuration.getSedan(), Configuration.getSuv(), Configuration.getSport()},
+        {Configuration.getSedanImage(), Configuration.getSuvImage(), Configuration.getSportImage()},
+        {Configuration.getSedanFlipedImage(), Configuration.getSuvFlipedImage(), Configuration.getSportFlipedImage()}
+    };
 
     public Generator(Road newrightRoad,Road newleftRoad){
         rightRoad =newrightRoad;
@@ -34,14 +38,9 @@ public class Generator {
                 new RecklessDriver()
         };
         for (int i = 0; i < Configuration.getNumberOfGeneratedVehicles(); i++) {
-            String[][] cars = {
-                    {Configuration.getSedan(), Configuration.getSuv(), Configuration.getSport()},
-                    {Configuration.getSedanImage(), Configuration.getSuvImage(), Configuration.getSportImage()},
-            };
             int randNumber = random.nextInt(3);
-            Vehicle vehicle = new VehicleFactory(rightRoad.getxAxis(), rightRoad.getyAxis() + 10, new File(cars[1][randNumber]), RoadDirection.RIGHT,drivers[randNumber]).getVehicle(cars[0][randNumber]);
+            Vehicle vehicle = new VehicleFactory(rightRoad.getxAxis(), rightRoad.getyAxis() + 10, new File(carsTypes[1][randNumber]), RoadDirection.RIGHT,drivers[randNumber]).getVehicle(carsTypes[0][randNumber]);
             rightRoad.addCar(vehicle);
-            //subject.addSubscriber();
             Collision.setVehicles(rightRoad.getCars());
             for (int x = 0; x < rightRoad.getRoadWidth(); x = x + 20) {
                 for (int y = rightRoad.getyAxis() + 10; y < rightRoad.getLaneHeight() * rightRoad.getNumberOfLane(); y = y + rightRoad.getLaneHeight()) {
@@ -58,12 +57,8 @@ public class Generator {
         }
 
         for(int i =0; i < Configuration.getNumberOfGeneratedVehicles();i++ ){
-            String[][] carsRoad = {
-                    {Configuration.getSedan(), Configuration.getSuv(), Configuration.getSport()},
-                    {Configuration.getSedanImage(), Configuration.getSuvImage(), Configuration.getSportImage()},
-            };
             int randNumber = random.nextInt(3);
-            Vehicle vehicle2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File(carsRoad[1][randNumber]),RoadDirection.LEFT,drivers[randNumber]).getVehicle(carsRoad[0][randNumber]);
+            Vehicle vehicle2 = new VehicleFactory(leftRoad.getWidth()-100,leftRoad.getyAxis()+10,new File(carsTypes[2][randNumber]),RoadDirection.LEFT,drivers[randNumber]).getVehicle(carsTypes[0][randNumber]);
             leftRoad.addCar(vehicle2);
             Collision collision2 = new Collision();
             collision2.setVehicles(leftRoad.getCars());
